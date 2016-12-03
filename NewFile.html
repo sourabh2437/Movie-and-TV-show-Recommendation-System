@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<style>
+.div1 {
+    width: 300px;
+    height: 50px;
+    border: 1px solid blue;
+background-color:grey;
+margin-top:50px;
+
+}
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#status {
+background-color:grey;
+color:white;
+text-align:center;
+padding:3px;
+
+
+
+}
+#login {
+align:center;
+}
+#footer {
+background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
+    margin-top:480px;
+}
+</style>
+<body background="bg.jpg">
+<div id="header">
+<h1>WhatNext !!!</h1>
+</div>
+<script>
+var ws= new WebSocket("ws://127.0.0.1:8080");
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '127256997673241',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+    FB.getLoginStatus(function(response){
+    	if (response.status === 'connected'){
+    		document.getElementById('status').innerHTML = 'We are connected';
+    	}
+    	else if(response.status === 'not_authorized'){
+    		document.getElementById('status').innerHTML = 'We are not connected';
+    	}
+    	else{
+    		document.getElementById('status').innerHTML = 'you are not logged into facebook';
+    	}
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+  function login() {
+	  FB.login(function(response){
+		  if (response.status === 'connected'){
+	    		document.getElementById('status').innerHTML = 'We are connected';
+	    	}
+	    	else if(response.status === 'not_authorized'){
+	    		document.getElementById('status').innerHTML = 'We are not connected';
+	    	}
+	    	else{
+	    		document.getElementById('status').innerHTML = 'You are not logged into facebook';
+	    	}
+	  },{scope:'user_likes'});
+  }
+  function getmovieinfo() {
+// 	  FB.api('/me','GET',{fields:'first_name,last_name,name,id,likes'},function(response){
+// 		  document.getElementById('status').innerHTML=console.log(response);
+// 	  });
+	FB.api('/me/movies',function(response) {
+		if(response && !response.error){
+// 			document.getElementById('status').innerHTML=response.paging;
+			for(var i=0;i<=25;i++)
+				{
+			console.log(JSON.stringify(response.data[i].name));
+			ws.send(response.data[i].name);
+				}
+			
+		}
+	});
+	
+  }
+  function gettvinfo() {
+// 	  FB.api('/me','GET',{fields:'first_name,last_name,name,id,likes'},function(response){
+// 		  document.getElementById('status').innerHTML=console.log(response);
+// 	  });
+	FB.api('/me/television',function(response) {
+		if(response && !response.error){
+// 			document.getElementById('status').innerHTML=response.paging;
+			for(var i=0;i<=25;i++)
+				{
+			console.log(JSON.stringify(response.data[i].name));
+			//ws.send(response.data[i].name);
+				}
+			
+		}
+	});
+	
+  }
+  
+</script>
+<center><div class=div1>
+<div id="status" style="color:yellow"></div>
+<button id="getmovieinfo" onclick=getmovieinfo()>Get movie info</button>
+<button id="gettvinfo" onclick=gettvinfo()>Get TV info</button>
+<button id="login" onclick=login()>Login</button>
+</div></center>
+<div id="footer">
+Copyright © Aditya Sourabh Lekha Waris
+</div>
+</body>
+</html>
