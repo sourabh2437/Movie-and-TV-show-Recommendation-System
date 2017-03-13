@@ -1,8 +1,8 @@
 import csv
 import operator
 
-f1=file('TVshow_Database.csv','r')
-f5=file('TV_movie_score.csv','w')
+f1=file('../data/TVshow_Database.csv','r')
+f5=file('../data/TV_movie_score.csv','w')
 
 
 for row in csv.reader(f1):
@@ -12,7 +12,7 @@ for row in csv.reader(f1):
         #new_row1=row[1].split(":")
         new_row2=row[1].split(":")
         #print new_row
-        f4=file('TV_output.csv','r')
+        f4=file('../data/TV_output.csv','r')
         for col in csv.reader(f4):
             #print col[0]
             if row[0]==col[0]:
@@ -22,7 +22,7 @@ for row in csv.reader(f1):
         if flag==0:
             for k in range(0,len(new_row2)):
                 index=new_row2[k]
-                f3=file('TV_top_genre.csv','r')
+                f3=file('../data/TV_top_genre.csv','r')
                 for l in csv.reader(f3):
                     if index==l[0]:
                         #print 'hi'

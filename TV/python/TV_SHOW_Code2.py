@@ -43,9 +43,9 @@ f2.close()'''
 ### End of part 1, now part 2
 
 genre_count=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-f1=file('TV_output.csv','r')
+f1=file('../data/TV_output.csv','r')
 for row in csv.reader(f1):
-    f2=file('TVshow_Database.csv','r')
+    f2=file('../data/TVshow_Database.csv','r')
     for j in csv.reader(f2):
         try:
             if row[0]==j[0]:
@@ -61,7 +61,7 @@ for row in csv.reader(f1):
                         
         except IndexError:
             pass
-f5=file('TV_genre_count.csv','w')
+f5=file('../data/TV_genre_count.csv','w')
 l= len(genre_count)               
 #for i in actors_count:
  #   print i

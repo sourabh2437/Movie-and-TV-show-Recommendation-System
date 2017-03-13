@@ -1,12 +1,12 @@
 import csv
 import operator
-f1=file('TV_movie_score.csv','r')
+f1=file('../data/TV_movie_score.csv','r')
 csv1=csv.reader(f1)
 sortedcsv=sorted(csv1,key=operator.itemgetter(1),reverse=True)
 k=0
 flag=0
 for i in sortedcsv:
-    f2=file('TVshow_id.csv','r')
+    f2=file('../data/TVshow_id.csv','r')
     for j in csv.reader(f2):
         if i[0]==j[1]:
             print j[0]

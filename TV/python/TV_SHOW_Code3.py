@@ -20,12 +20,12 @@ f5.close()
 
 #print "\n"'''
 
-f3=file('TV_genre_count.csv','r')
-f6=file('TV_top_genre.csv','w')
+f3=file('../data/TV_genre_count.csv','r')
+f6=file('../data/TV_top_genre.csv','w')
 csv2=csv.reader(f3)
 sortedcsv2=sorted(csv2,key=operator.itemgetter(1),reverse=True)
 for i in sortedcsv2:
-    f4=file('genre.csv','r')
+    f4=file('../data/genre.csv','r')
     for j in csv.reader(f4):
         if i[0]==j[1]:
             output=''

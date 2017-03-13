@@ -1,8 +1,8 @@
 import csv
 
 
-f2 = file('TV_like.csv', 'r')
-f3 = file('TV_output.csv', 'w')
+f2 = file('../TV_like.csv', 'r')
+f3 = file('../data/TV_output.csv', 'w')
 
 
 
@@ -10,7 +10,7 @@ c3 = csv.writer(f3)
 
 
 for user in csv.reader(f2):
-        f1 = file('TVshow_id.csv', 'r')
+        f1 = file('../data/TVshow_id.csv', 'r')
         for admin in csv.reader(f1):
                 try:
                         if user[0]==admin[0]:
